@@ -1,0 +1,21 @@
+{
+    "training":
+    {
+        "batch_size": 16,
+        "trans_resize": 80,
+        "trans_normalize_param1": [0.485, 0.456, 0.406],
+        "trans_normalize_param2": [0.229, 0.224, 0.225]
+    },
+    "evaluation":
+    {
+
+    },
+    "registration":
+    {
+        "tags": ["mse"]
+    },
+    "scoring":
+    {
+        
+    }
+}
