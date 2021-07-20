@@ -17,19 +17,24 @@ class TrainModel:
     """
     Train model
     """
-    def __init__(self):
+    def __init__(self, *args, **kwargs):
         """
         Initiate variables
         """
         # Batch size for training (change depending on how much memory you have)
-        self.batch_size = 16
+        self.batch_size = args[0]['batch_size']
 
         # Number of epochs to train for
-        self.num_epochs = 100
+        self.num_epochs = args[0]['num_epochs']
 
         # Run on CPU
-        self.device = 'cpu'
+        self.device = kwargs['system']['device']
 
+        self.losses_save_path = args[0]['losses_save_path']
+        self.accuracies_save_path = args[0]['accuracies_save_path']
+        self.data_location = args[0]['data_location']
+
+        # TODO: Remove class variables which are not part of this class. Refactoring needed.
         self.val_loss_history = []
         self.val_acc_history = []
         self.train_loss_history = []
@@ -50,15 +55,15 @@ class TrainModel:
 
         # Create training and validation datasets
         image_datasets = {
-            "train": datasets.ImageFolder("data/train", ah_transforms),
-            "test": datasets.ImageFolder("data/test", ah_transforms),
+            "train": datasets.ImageFolder(f"{self.data_location}/train", ah_transforms),
+            "test": datasets.ImageFolder(f"{self.data_location}/test", ah_transforms),
         }
         dataloaders_dict = {
             "train": torch.utils.data.DataLoader(image_datasets["train"], batch_size=self.batch_size, shuffle=True),
             "test": torch.utils.data.DataLoader(image_datasets["test"], batch_size=self.batch_size, shuffle=True),
         }
 
-        self.data = ImageDataLoaders.from_folder('./data', train='train', valid='test', bs=self.batch_size, num_workers=4)
+        self.data = ImageDataLoaders.from_folder(self.data_location, train='train', valid='test', bs=self.batch_size, num_workers=4)
         classes = self.data.vocab
         print("Classes:", classes)
         print("Dimensions:", self.get_dimensions(dataloaders_dict), "(batch x channels x height x width)")
@@ -148,21 +153,41 @@ class TrainModel:
         return deep_model
 
     def save_model_metrics(self):
+        """
+        Save model metrics
+        :return:
+        """
         deep_history = (self.val_loss_history, self.val_acc_history, self.train_loss_history, self.train_acc_history)
+        self.save_loss(self.losses_save_path, deep_history)
+        self.save_accuracy(self.accuracies_save_path, deep_history)
+
+    def save_loss(self, location, deep_history):
+        """
+        Save losses.jpg
+        :param location: Location to the path to save the picture
+        :param deep_history: Deep learning model information
+        :return:
+        """
         plt.figure(figsize=(16,9))
         plt.title("losses")
         plt.plot(deep_history[0], '-o', label="val loss")
         plt.plot(deep_history[2], '-o', label="train loss")
         plt.legend()
-        plt.savefig("model/metrics/losses.jpg")
+        plt.savefig(location)
 
+    def save_accuracy(self, location, deep_history):
+        """
+        Save accuracy.jpg file
+        :param location:
+        :param deep_history:
+        :return:
+        """
         plt.figure(figsize=(16,9))
         plt.title("accuracy")
         plt.plot(deep_history[1], '-o', label="val acc")
         plt.plot(deep_history[3], '-o', label="train acc")
         plt.legend()
-        plt.savefig("model/metrics/accuracies.jpg")
-        plt.show()
+        plt.savefig(location)
 
     def save_model(self, deep_model, path='model/pickle/model.pth'):
         """

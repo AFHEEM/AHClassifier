@@ -9,9 +9,9 @@ class ScoreModel:
     Score model based on test data
     """
 
-    def __init__(self):
+    def __init__(self, *args, **kwargs):
         # Run on CPU
-        self.device = 'cpu'
+        self.device = kwargs['system']['device']
 
     def score(self, ah_transforms, data, path='model/pickle/model.pth'):
         image_path = 'scoring/score_test/test_f.jpg'  # './test_nf.jpg'

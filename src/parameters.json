@@ -1,0 +1,27 @@
+{
+    "training":
+    {
+        "batch_size": 16,
+        "trans_resize": 80,
+        "num_epochs": 100,
+        "losses_save_path": "model/metrics/losses.jpg",
+        "accuracies_save_path": "model/metrics/accuracies.jpg",
+        "data_location": "../data"
+    },
+    "evaluation":
+    {
+
+    },
+    "registration":
+    {
+        "tags": ["mse"]
+    },
+    "scoring":
+    {
+        
+    },
+    "system":
+    {
+        "device": "cpu"
+    }
+}

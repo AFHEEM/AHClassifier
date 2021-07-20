@@ -10,9 +10,9 @@ class EvaluateModel:
     Evaulate the model
     """
 
-    def __init__(self):
+    def __init__(self, *args, **kwargs):
         # Run on CPU
-        self.device = 'cpu'
+        self.device = kwargs['system']['device']
 
     def evaluate(self, dataloaders_dict):
         """
