@@ -1,7 +1,8 @@
 from python:3.8
 
-ENV http_proxy http://nl-userproxy-access.net.abnamro.com:8080
-ENV https_proxy http://nl-userproxy-access.net.abnamro.com:8080
+# Add proxy if network is behind a firewall
+#ENV http_proxy http://abc.com:8080
+#ENV https_proxy http://abc.com:8080
 
 WORKDIR /AHImageClassifier
 

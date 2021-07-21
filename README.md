@@ -32,8 +32,18 @@ This project processes images and applies deep learning to check whether the ima
 │   ├───scoring<br />
 │   ├───training<br />
 │   └───util<br />
+└───main.py<br />
 
-
+<b>data</b>: This folder contains the train and test split data. Each folder contains a food and a non food image.</br>
+<b>env_setup</b>: This folder contains the yaml pipelines needed to provision Azure resources</br>
+<b>pipelines</b>: This folder contains the training CI, CD and model registry pipelines</br>
+<b>src</b>: This folder contains the source code for the application. It is divided in the following packages</br>
+- evaluate: Evaluates model performance
+- model: Contains model and model metrics
+- register: Used for model registry to Azure Machine Learning workspace
+- scoring: Used for scoring the model. 
+- training: Used for training the model.
+- util: Utility classes to help model building, packaging and deployment.
 
 ## Running this project
 
@@ -90,9 +100,6 @@ docker run -p 8084:8084 ahclassifier
 The Dockerfile is built using a standard python environment using python==3.8
 ```
 from python:3.8
-
-ENV http_proxy http://nl-userproxy-access.net.abnamro.com:8080
-ENV https_proxy http://nl-userproxy-access.net.abnamro.com:8080
 
 WORKDIR /AHImageClassifier
 
