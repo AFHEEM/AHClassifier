@@ -61,10 +61,10 @@ Then install the project dependencies with
 pip install -r requirements.txt
 ```
 
-Now you can run the project with this command by navigating to the AHImgClassifier/src folder
+Now you can run the project with this command by opening a terminal and navigating to the AHImgClassifier/src folder
 
 ```
-cd AHImgClassifier\src\
+cd AHImgClassifier/src/
 python main.py
 ```
 
@@ -79,8 +79,8 @@ In order to use the Dockerfile in the project, you must have Docker Engine insta
 for setting up Docker Engine are
 [available on the Docker website](https://docs.docker.com/engine/installation/).
 
-Once docker is installed, run the following command:
-```aidl
+Once docker is installed, open a terminal and run the following command:
+```
 cd AHImgClassifier
 
 docker build --tag ahclassifier .
@@ -88,7 +88,7 @@ docker run -p 8084:8084 ahclassifier
 ```
 
 The Dockerfile is built using a standard python environment using python==3.8
-```aidl
+```
 from python:3.8
 
 ENV http_proxy http://nl-userproxy-access.net.abnamro.com:8080
@@ -111,7 +111,7 @@ CMD ["python3", "-m", "main"]
 
 ```
 If your network is behind a proxy, then you can add values in the http_proxy and https_proxy variables for e.g.
-```aidl
+```
 ENV http_proxy <proxyurl:port>
 ENV https_proxy <proxyurl:port>
 ```
@@ -124,7 +124,7 @@ version of the PyTorch image to enable hardware acceleration. To enable gpu, do 
 cd AHImgClassifier\src\
 ```
 Open the file parameters.json and modify the "device" value from cpu to gpu.
-```aidl
+```
 "system":
     {
         "device": "gpu"
