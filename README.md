@@ -33,6 +33,7 @@ This project processes images and applies deep learning to check whether the ima
 │   ├───training<br />
 │   └───util<br />
 └───main.py<br />
+└───parameters.json<br />
 
 <b>data</b>: This folder contains the train and test split data. Each folder contains a food and a non food image.</br>
 <b>env_setup</b>: This folder contains the yaml pipelines needed to provision Azure resources</br>
@@ -44,6 +45,9 @@ This project processes images and applies deep learning to check whether the ima
 - scoring: Used for scoring the model. 
 - training: Used for training the model. This package also contains a [test_train.py](src/training/test_train.py)  file used for unit testing of the training module
 - util: Utility classes to help model building, packaging and deployment.
+  
+<b>main.py</b>: Entry point for the program. Used for running the ML pipeline i.e. training, evaluation and scoring </br>
+  <b>parameters.json</b>: This file contains global program parameters for use within the application</br>
 
 <b>Note</b>: The .yml piplines in this repository are just for reference purposes. They are not fully integrated in the source code.
 ## Running this project
