@@ -42,9 +42,10 @@ This project processes images and applies deep learning to check whether the ima
 - model: Contains model and model metrics
 - register: Used for model registry to Azure Machine Learning workspace
 - scoring: Used for scoring the model. 
-- training: Used for training the model.
+- training: Used for training the model. This package also contains a [test_train.py](src/training/test_train.py)  file used for unit testing of the training module
 - util: Utility classes to help model building, packaging and deployment.
 
+<b>Note</b>: The .yml piplines in this repository are just for reference purposes. They are not fully integrated in the source code.
 ## Running this project
 
 To get this project up and running you should start by having Python installed on your computer. It's advised you create a virtual environment to store your projects dependencies separately. You can install virtualenv with
