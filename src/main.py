@@ -1,8 +1,8 @@
+import json
+
 from evaluate.evaluate_model import EvaluateModel
 from scoring.score import ScoreModel
 from training.train import TrainModel
-
-import json
 
 
 def main():

@@ -6,7 +6,8 @@
         "num_epochs": 100,
         "losses_save_path": "model/metrics/losses.jpg",
         "accuracies_save_path": "model/metrics/accuracies.jpg",
-        "data_location": "../data"
+        "data_location": "../data",
+        "seed": 0.2
     },
     "evaluation":
     {

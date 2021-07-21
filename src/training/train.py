@@ -1,16 +1,13 @@
-import torch
-import os
-import time
 import copy
-import torchvision.models as models
-from torchvision import transforms, datasets
+import time
+import torch
+from fastai.vision.all import ImageDataLoaders
+from matplotlib import pyplot as plt
 from torch import nn
 from torch import optim
-from matplotlib import pyplot as plt
-from model.model import DeepModel
+from torchvision import transforms, datasets
 
-from fastai.vision.all import ImageDataLoaders
-import numpy as np
+from model.model import DeepModel
 
 
 class TrainModel:
@@ -33,6 +30,7 @@ class TrainModel:
         self.losses_save_path = args[0]['losses_save_path']
         self.accuracies_save_path = args[0]['accuracies_save_path']
         self.data_location = args[0]['data_location']
+        self.seed = args[0]['seed']
 
         # TODO: Remove class variables which are not part of this class. Refactoring needed.
         self.val_loss_history = []
@@ -63,7 +61,7 @@ class TrainModel:
             "test": torch.utils.data.DataLoader(image_datasets["test"], batch_size=self.batch_size, shuffle=True),
         }
 
-        self.data = ImageDataLoaders.from_folder(self.data_location, train='train', valid='test', bs=self.batch_size, num_workers=4)
+        self.data = ImageDataLoaders.from_folder(self.data_location, train='train', valid='test', bs=self.batch_size, num_workers=4, seed=self.seed)
         classes = self.data.vocab
         print("Classes:", classes)
         print("Dimensions:", self.get_dimensions(dataloaders_dict), "(batch x channels x height x width)")
@@ -77,6 +75,7 @@ class TrainModel:
         :param :
         :return:
         """
+        # TODO: Break this function into smaller functions to reduce cognitive complexity
         deep_model = DeepModel()
 
         # Print the model we just instantiated

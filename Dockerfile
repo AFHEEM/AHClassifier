@@ -12,7 +12,7 @@ RUN pip install --trusted-host pypi.python.org --trusted-host pypi.org --trusted
 # Add all files to working directory
 ADD . /AHImageClassifier
 
-# Change working directory for avoiding os.path issues
+# Change working directory to source code
 WORKDIR /AHImageClassifier/src
 
 # Run program
