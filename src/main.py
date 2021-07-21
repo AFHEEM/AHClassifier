@@ -6,6 +6,10 @@ from training.train import TrainModel
 
 
 def main():
+    # TODO: Create a factory class to make training, evaluation and scoring independent.
+    #  Due to time constraints, I couldnot add this functionality !
+    #   These files can then be run individually and parameters can be captured using *args and **kwargs
+
     # Load applicaton parameters from parameters.json
     params = json.load(open('parameters.json'))
 
